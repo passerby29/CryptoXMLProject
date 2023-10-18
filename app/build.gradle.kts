@@ -27,21 +27,21 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 }
 
 dependencies {
 
-    implementation(project(path = ":data"))
     implementation(project(path = ":domain"))
+    implementation(project(path = ":data"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -51,18 +51,15 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    //coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.1")
-    //vico
-    implementation("com.patrykandpatrick.vico:compose:1.11.1")
-    implementation("com.patrykandpatrick.vico:compose-m3:1.11.1")
-    implementation("com.patrykandpatrick.vico:core:1.11.1")
-    //coil
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    //pager
-    implementation("com.google.accompanist:accompanist-pager:0.19.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.19.0")
+    //navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+    //glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

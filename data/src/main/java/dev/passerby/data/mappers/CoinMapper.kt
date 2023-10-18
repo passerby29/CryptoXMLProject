@@ -17,7 +17,7 @@ class CoinMapper {
         id = dto.id,
         marketCap = dto.marketCap,
         name = dto.name,
-        price = roundDouble(dto.price),
+        price = dto.price,
         priceBtc = dto.priceBtc,
         priceChange1d = dto.priceChange1d,
         priceChange1h = dto.priceChange1h,
@@ -53,14 +53,4 @@ class CoinMapper {
         volume = dbModel.volume,
         websiteUrl = dbModel.websiteUrl,
     )
-
-    private fun roundDouble(double: Double): Double{
-        val decimalFormat = DecimalFormat(DECIMAL_FORMAT_PATTERN)
-        decimalFormat.roundingMode = RoundingMode.DOWN
-        return decimalFormat.format(double).toDouble()
-    }
-
-    companion object{
-        private const val DECIMAL_FORMAT_PATTERN = "#.##"
-    }
 }

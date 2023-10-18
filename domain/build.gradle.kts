@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "dev.passerby.domain"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 21

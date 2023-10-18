@@ -18,7 +18,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val getTopCoinsListUseCase = GetTopCoinsListUseCase(repository)
     private val getFavoritesUseCase = GetFavoritesUseCase(repository)
     private val searchCoinsUseCase = SearchCoinsUseCase(repository)
-    private val loadCoinsUseCase = LoadCoinsUseCase(repository)
+    val loadCoinsUseCase = LoadCoinsUseCase(repository)
 
     val coinsList = getCoinsListUseCase()
     val topCoinsList = getTopCoinsListUseCase()

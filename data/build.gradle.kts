@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "dev.passerby.data"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 21
@@ -43,7 +43,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     //room

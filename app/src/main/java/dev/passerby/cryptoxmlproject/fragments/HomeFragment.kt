@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         coinsAdapter = CoinsAdapter(requireContext())
-        favoritesAdapter = FavoritesAdapter()
+        favoritesAdapter = FavoritesAdapter(requireContext())
         binding.homeMainRecyclerView.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),

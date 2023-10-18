@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
+import dev.passerby.cryptoxmlproject.R
 import dev.passerby.cryptoxmlproject.adapter.CoinsAdapter
 import dev.passerby.cryptoxmlproject.adapter.FavoritesAdapter
 import dev.passerby.cryptoxmlproject.databinding.FragmentHomeBinding
@@ -45,7 +47,7 @@ class HomeFragment : Fragment() {
         initViewPager()
         observeViewModel()
         binding.homeShowAllButton.setOnClickListener {
-            BottomSheetFragment().show(parentFragmentManager, "tag")
+            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetFragment)
         }
     }
 
@@ -63,6 +65,7 @@ class HomeFragment : Fragment() {
             )
             adapter = coinsAdapter
         }
+        setOnCoinClickListener()
     }
 
     private fun initViewPager() {
@@ -84,9 +87,14 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setOnCoinClickListener(){
+        coinsAdapter.onCoinItemCLickListener = {
+            findNavController().navigate(R.id.action_homeFragment_to_coinInfoFragment)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
 }

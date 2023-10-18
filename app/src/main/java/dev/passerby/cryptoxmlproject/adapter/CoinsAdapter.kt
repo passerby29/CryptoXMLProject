@@ -15,9 +15,7 @@ import java.text.DecimalFormat
 class CoinsAdapter(private val context: Context) :
     ListAdapter<CoinModel, CoinViewHolder>(CoinDiffCallback()) {
 
-    interface CoinClickListener{
-        fun coinCLick(itemId: Int)
-    }
+    var onCoinItemCLickListener: ((CoinModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinViewHolder {
         val itemView =
@@ -34,6 +32,7 @@ class CoinsAdapter(private val context: Context) :
             coinSymbolTextView.text = item.symbol
             coinPriceTextView.text = roundDouble(item.price)
             coinChangeTextView.text = item.priceChange1h.toString()
+            this.root.setOnClickListener { onCoinItemCLickListener?.invoke(item) }
         }
     }
 

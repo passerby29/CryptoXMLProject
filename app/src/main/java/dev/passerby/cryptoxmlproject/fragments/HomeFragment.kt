@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayoutMediator
 import dev.passerby.cryptoxmlproject.adapter.CoinsAdapter
+import dev.passerby.cryptoxmlproject.adapter.FavoritesAdapter
 import dev.passerby.cryptoxmlproject.databinding.FragmentHomeBinding
 import dev.passerby.cryptoxmlproject.viewmodels.HomeViewModel
 
@@ -22,6 +24,7 @@ class HomeFragment : Fragment() {
     }
 
     private lateinit var coinsAdapter: CoinsAdapter
+    private lateinit var favoritesAdapter: FavoritesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         coinsAdapter = CoinsAdapter(requireContext())
+        favoritesAdapter = FavoritesAdapter()
         binding.homeMainRecyclerView.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -43,8 +47,13 @@ class HomeFragment : Fragment() {
             )
             adapter = coinsAdapter
         }
+        binding.homeFavoritesPager.adapter = favoritesAdapter
+        TabLayoutMediator(binding.homeFavoritesTabLayout, binding.homeFavoritesPager) { _, _ ->
+
+        }.attach()
         viewModel.topCoinsList.observe(viewLifecycleOwner) {
             coinsAdapter.submitList(it)
+            favoritesAdapter.submitList(it)
         }
     }
 

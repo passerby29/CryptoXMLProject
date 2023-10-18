@@ -16,7 +16,7 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="4dp"
         android:text="Sunday, 16th July"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,6 +43,32 @@
         app:layout_constraintBottom_toBottomOf="@+id/materialTextView"
         app:layout_constraintEnd_toStartOf="@+id/appCompatImageButton"
         app:layout_constraintTop_toTopOf="@+id/materialTextView" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/homeFavoritesPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintDimensionRatio="H, 3:2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/homeFavoritesTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeFavoritesPager"
+        app:tabBackground="@drawable/item_tab_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:tabPaddingEnd="10dp"
+        app:tabPaddingStart="10dp" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"

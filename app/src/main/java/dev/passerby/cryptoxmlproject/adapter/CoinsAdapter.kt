@@ -15,6 +15,10 @@ import java.text.DecimalFormat
 class CoinsAdapter(private val context: Context) :
     ListAdapter<CoinModel, CoinViewHolder>(CoinDiffCallback()) {
 
+    interface CoinClickListener{
+        fun coinCLick(itemId: Int)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinViewHolder {
         val itemView =
             ItemCoinBinding.inflate(LayoutInflater.from(parent.context), parent, false)

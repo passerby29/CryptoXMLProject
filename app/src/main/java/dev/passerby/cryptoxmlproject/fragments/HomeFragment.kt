@@ -12,6 +12,7 @@ import dev.passerby.cryptoxmlproject.adapter.CoinsAdapter
 import dev.passerby.cryptoxmlproject.adapter.FavoritesAdapter
 import dev.passerby.cryptoxmlproject.databinding.FragmentHomeBinding
 import dev.passerby.cryptoxmlproject.viewmodels.HomeViewModel
+import dev.passerby.domain.models.CoinModel
 
 class HomeFragment : Fragment() {
 
@@ -22,6 +23,9 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(this)[HomeViewModel::class.java]
     }
+
+    private var topCoinsList: List<CoinModel> = listOf()
+    private var allCoinsList: List<CoinModel> = listOf()
 
     private lateinit var coinsAdapter: CoinsAdapter
     private lateinit var favoritesAdapter: FavoritesAdapter
@@ -36,9 +40,21 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initAdapters()
+        initRecyclerView()
+        initViewPager()
+        observeViewModel()
+        binding.homeShowAllButton.setOnClickListener {
+            BottomSheetFragment().show(parentFragmentManager, "tag")
+        }
+    }
 
+    private fun initAdapters() {
         coinsAdapter = CoinsAdapter(requireContext())
         favoritesAdapter = FavoritesAdapter(requireContext())
+    }
+
+    private fun initRecyclerView() {
         binding.homeMainRecyclerView.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -47,13 +63,24 @@ class HomeFragment : Fragment() {
             )
             adapter = coinsAdapter
         }
-        binding.homeFavoritesPager.adapter = favoritesAdapter
-        TabLayoutMediator(binding.homeFavoritesTabLayout, binding.homeFavoritesPager) { _, _ ->
+    }
 
-        }.attach()
+    private fun initViewPager() {
+        binding.homeFavoritesPager.adapter = favoritesAdapter
+        TabLayoutMediator(
+            binding.homeFavoritesTabLayout,
+            binding.homeFavoritesPager
+        ) { _, _ -> }.attach()
+    }
+
+    private fun observeViewModel() {
         viewModel.topCoinsList.observe(viewLifecycleOwner) {
-            coinsAdapter.submitList(it)
+            topCoinsList = it
             favoritesAdapter.submitList(it)
+            coinsAdapter.submitList(it)
+        }
+        viewModel.coinsList.observe(viewLifecycleOwner) {
+            allCoinsList = it
         }
     }
 

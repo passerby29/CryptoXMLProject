@@ -87,9 +87,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setOnCoinClickListener(){
+    private fun setOnCoinClickListener() {
         coinsAdapter.onCoinItemCLickListener = {
-            findNavController().navigate(R.id.action_homeFragment_to_coinInfoFragment)
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToCoinInfoFragment(it.id)
+            )
         }
     }
 

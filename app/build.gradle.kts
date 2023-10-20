@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -62,4 +63,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
     //glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    //vico
+    implementation("com.patrykandpatrick.vico:core:1.12.0")
+    implementation("com.patrykandpatrick.vico:views:1.12.0")
 }

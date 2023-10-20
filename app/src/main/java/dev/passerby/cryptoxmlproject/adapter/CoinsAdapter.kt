@@ -30,26 +30,9 @@ class CoinsAdapter(private val context: Context) :
             Glide.with(context).load(item.icon).into(coinLogoImageView)
             coinNameTextView.text = item.name
             coinSymbolTextView.text = item.symbol
-            coinPriceTextView.text = roundDouble(item.price)
+            coinPriceTextView.text = item.price.toString()
             coinChangeTextView.text = item.priceChange1h.toString()
             this.root.setOnClickListener { onCoinItemCLickListener?.invoke(item) }
         }
-    }
-
-    private fun roundDouble(double: Double): String {
-        val decimalFormat = DecimalFormat(
-            if (double >= 10) {
-                DECIMAL_FORMAT_PATTERN_TWO
-            } else {
-                DECIMAL_FORMAT_PATTERN_FOUR
-            }
-        )
-        decimalFormat.roundingMode = RoundingMode.DOWN
-        return decimalFormat.format(double)
-    }
-
-    companion object {
-        private const val DECIMAL_FORMAT_PATTERN_FOUR = "#.####"
-        private const val DECIMAL_FORMAT_PATTERN_TWO = "#.##"
     }
 }

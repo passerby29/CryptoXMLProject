@@ -3,8 +3,9 @@ package dev.passerby.data.mappers
 import dev.passerby.data.models.db.CoinDbModel
 import dev.passerby.data.models.dto.Coin
 import dev.passerby.domain.models.CoinModel
-import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 
 class CoinMapper {
 
@@ -17,7 +18,7 @@ class CoinMapper {
         id = dto.id,
         marketCap = dto.marketCap,
         name = dto.name,
-        price = dto.price,
+        price = roundDouble(dto.price),
         priceBtc = dto.priceBtc,
         priceChange1d = dto.priceChange1d,
         priceChange1h = dto.priceChange1h,
@@ -53,4 +54,22 @@ class CoinMapper {
         volume = dbModel.volume,
         websiteUrl = dbModel.websiteUrl,
     )
+
+    private fun roundDouble(double: Double): Double {
+        val locale = Locale("en", "UK")
+        val pattern = if (double >= 10) {
+            DECIMAL_FORMAT_PATTERN_TWO
+        } else {
+            DECIMAL_FORMAT_PATTERN_FOUR
+        }
+        val decimalFormat = NumberFormat.getNumberInstance(locale) as DecimalFormat
+        decimalFormat.applyPattern(pattern)
+
+        return decimalFormat.format(double).toDouble()
+    }
+
+    companion object {
+        private const val DECIMAL_FORMAT_PATTERN_FOUR = "###.####"
+        private const val DECIMAL_FORMAT_PATTERN_TWO = "###.##"
+    }
 }

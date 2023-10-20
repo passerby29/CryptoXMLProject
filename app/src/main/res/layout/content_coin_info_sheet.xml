@@ -61,7 +61,7 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/homeShowAllButton"
+        android:id="@+id/coinInfoShowAllButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <com.patrykandpatrick.vico.views.chart.ChartView
-        android:id="@+id/infoCollapsedChartView"
+        android:id="@+id/coinInfoCollapsedChartView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
@@ -82,6 +82,6 @@
         app:horizontalLayout="fullWidth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/homeShowAllButton" />
+        app:layout_constraintTop_toTopOf="@+id/coinInfoShowAllButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

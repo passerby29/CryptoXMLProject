@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/coinInfoLogoImageView"
-        android:layout_width="168dp"
-        android:layout_height="168dp"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

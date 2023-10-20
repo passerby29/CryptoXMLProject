@@ -49,7 +49,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
         coinsAdapter = CoinsAdapter(requireContext())
 
-        binding.homeMainRecyclerView.apply {
+        binding.homeBigRecyclerView.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 LinearLayoutManager.VERTICAL,

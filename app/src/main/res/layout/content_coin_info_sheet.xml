@@ -16,12 +16,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/coinInfoPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$27,243.00"
             android:textSize="40sp" />
 
         <TextView
+            android:id="@+id/coinInfoChangeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+$4,271 (18,55%)"
@@ -39,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
+            android:id="@+id/coinInfoMaxTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Today MAX: $22,124"
@@ -47,6 +50,7 @@
             app:drawableTint="@color/black" />
 
         <TextView
+            android:id="@+id/coinInfoMinTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

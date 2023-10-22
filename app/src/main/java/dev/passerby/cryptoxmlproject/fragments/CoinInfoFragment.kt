@@ -1,9 +1,12 @@
 package dev.passerby.cryptoxmlproject.fragments
 
+import android.graphics.ColorFilter
+import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -15,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDE
 import dev.passerby.cryptoxmlproject.databinding.FragmentCoinInfoBinding
 import dev.passerby.cryptoxmlproject.factories.CoinInfoViewModelFactory
 import dev.passerby.cryptoxmlproject.viewmodels.CoinInfoViewModel
+
 
 class CoinInfoFragment : Fragment() {
 
@@ -72,8 +76,23 @@ class CoinInfoFragment : Fragment() {
                         STATE_COLLAPSED
                     }
                 }
+                coinInfoBackButton.setOnClickListener {
+                    setBW(coinInfoLogoImageView)
+                }
             }
         }
+    }
+
+    private fun setBW(iv: ImageView) {
+        val brightness = 10f // change values to suite your need
+        val colorMatrix = floatArrayOf(
+            0.33f, 0.33f, 0.33f, 0f, brightness,
+            0.33f, 0.33f, 0.33f, 0f, brightness,
+            0.33f, 0.33f, 0.33f, 0f, brightness,
+            0f, 0f, 0f, 1f, 0f
+        )
+        val colorFilter: ColorFilter = ColorMatrixColorFilter(colorMatrix)
+        iv.colorFilter = colorFilter
     }
 
     override fun onDestroy() {

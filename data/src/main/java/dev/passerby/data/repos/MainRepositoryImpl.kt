@@ -23,6 +23,11 @@ class MainRepositoryImpl(application: Application) : MainRepository {
     private val coinMapper = CoinMapper()
     private var result: MutableLiveData<BaseResponse<CoinsDto>> = MutableLiveData()
 
+    override fun getCoinInfo(coinId: String): LiveData<CoinModel> {
+        val coinInfo = coinDao.getCoinInfo(coinId)
+        return coinInfo.map { coinMapper.mapDbModelToEntity(it) }
+    }
+
     override fun getCoinList(): LiveData<List<CoinModel>> {
         val coinList = coinDao.getCoinList()
         return getEntityList(coinList)

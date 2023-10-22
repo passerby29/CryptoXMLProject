@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import dev.passerby.cryptoxmlproject.R
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import dev.passerby.cryptoxmlproject.databinding.FragmentCoinInfoBinding
 import dev.passerby.cryptoxmlproject.factories.CoinInfoViewModelFactory
 import dev.passerby.cryptoxmlproject.viewmodels.CoinInfoViewModel
@@ -44,11 +46,32 @@ class CoinInfoFragment : Fragment() {
                 Glide.with(requireContext()).load(coin.icon).into(coinInfoLogoImageView)
                 coinInfoNameTextView.text = coin.name
                 coinInfoSymbolTextView.text = coin.symbol
-                val bottomSheet = coinInfoMainViewStub.inflate()
-                    bottomSheet.findViewById<TextView>(R.id.coinInfoPriceTextView).text = coin.price.toString()
-                    bottomSheet.findViewById<TextView>(R.id.coinInfoChangeTextView).text =
-                        coin.priceChange1h.toString()
+                coinInfoMainViewStub.visibility = View.VISIBLE
+                val behavior = BottomSheetBehavior.from(coinInfoBottomSheetContainer)
+                behavior.peekHeight = (resources.displayMetrics.heightPixels * 0.45).toInt()
+                behavior.maxHeight = (resources.displayMetrics.heightPixels * 0.9).toInt()
+                behavior.addBottomSheetCallback(object : BottomSheetCallback() {
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    }
 
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                        if (slideOffset > 0.5f) {
+                            coinInfoMainViewStub.visibility = View.GONE
+                            coinInfoExpandedViewStub.visibility = View.VISIBLE
+                        } else {
+                            coinInfoMainViewStub.visibility = View.VISIBLE
+                            coinInfoExpandedViewStub.visibility = View.GONE
+                        }
+                    }
+                })
+
+                coinInfoFavButton.setOnClickListener {
+                    behavior.state = if (behavior.state == STATE_COLLAPSED) {
+                        STATE_EXPANDED
+                    } else {
+                        STATE_COLLAPSED
+                    }
+                }
             }
         }
     }
